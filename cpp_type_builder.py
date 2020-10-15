@@ -64,6 +64,7 @@ class cpp_type_builder:
 
             # write file boiler plate stuff
             hdr_name = self.config_dict["output_header_file"]
+            hdr_name = os.path.basename(hdr_name)
             hdr_name = hdr_name.replace('.', '_')
             hdr_name = hdr_name.replace('/', '_')
             hdr_name = hdr_name.replace('\\', '_')
@@ -157,6 +158,7 @@ class cpp_type_builder:
             # generate prototype
             print("struct "+st+";", file=self.prototypes)
             # generate definition
+            print("////////////////////////////////////////////////////////", file=self.header_output)
             print("struct "+st+" {", file=self.header_output)
             for member in entry["entries"]:
                 print("    "+member["datatype"]+" "+member["name"]+";", file=self.header_output)
