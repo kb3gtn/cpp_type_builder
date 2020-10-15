@@ -1,0 +1,46 @@
+{
+  "output_header_file" : "output/radio_types.hpp",
+  "type_list" : [
+    { 
+      "mod_t" : {
+        "format" : "enum_class",
+        "basetype" : "uint8_t",
+        "enum_entries" : [
+          "undefined=0",
+          "usb",
+          "lsb",
+          "cw",
+          "fm",
+          "am",
+          "rtty",
+          "psk"
+        ]        
+      }
+    },
+    {
+      "radio_make_t" : {
+        "format" : "enum_class",
+        "basetype" : "uint32_t",
+        "enum_entries" : [
+          "undefined=0",
+          "kw_ts2000",
+          "kw_ts590",
+          "kw_ts890",
+          "ys_ft920",
+          "ic_ic7000"
+        ]
+      }     
+    },
+    {
+      "radio_tlm_t" : {
+        "format" : "struct",
+        "entries" : [
+            { "name" : "vfo_a", "datatype" : "double" },
+            { "name" : "mod_a", "datatype" : "mod_t" },
+            { "name" : "radio_make", "datatype" : "radio_make_t"}
+        ]
+      }
+    }
+  ]
+}
+
