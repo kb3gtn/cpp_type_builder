@@ -171,7 +171,8 @@ class cpp_type_builder:
             print("std::ostream& operator <<(std::ostream& os, const "+str(st)+"& v) {", file=self.header_output)
             print("    os << \"struct "+st+" {\";", file=self.header_output)
             for member in entry["entries"]:
-                print("    os << ' ' << \""+member["name"]+":\" << v."+member["name"]+";", file=self.header_output)
+                mem_name = member["name"].split("=")[0]  # remove '=' if it exists
+                print("    os << ' ' << \""+mem_name+":\" << v."+mem_name+";", file=self.header_output)
             print("    os << \" }\";", file=self.header_output)
             print("    return os;", file=self.header_output)
             print("}", file=self.header_output)
