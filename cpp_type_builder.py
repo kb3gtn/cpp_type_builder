@@ -137,7 +137,7 @@ class cpp_type_builder:
             # build ostream helper
             print("std::ostream& operator <<(std::ostream& os, const "+str(dt)+"& v);", file=self.prototypes)
             print("std::ostream& operator <<(std::ostream& os, const "+str(dt)+"& v) {", file=self.header_output)
-            print("    os << to_string(m);", file=self.header_output )
+            print("    os << to_string(v);", file=self.header_output )
             print("    return os;", file=self.header_output)
             print("}", file=self.header_output)
             print('', file=self.header_output)
