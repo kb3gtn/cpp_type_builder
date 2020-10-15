@@ -104,6 +104,7 @@ class cpp_type_builder:
         for dt in self.enumtypes:
             entry = self.enumtypes[dt]
             print("building enum class for type "+dt)
+            print("", file=self.prototypes)
             print("enum class "+str(dt)+" : "+str(entry["basetype"])+";", file=self.prototypes)
 
             print("", file=self.header_output)
@@ -134,8 +135,8 @@ class cpp_type_builder:
             print("}", file=self.header_output)
             print('', file=self.header_output)
             # build ostream helper
-            print("std::ostream& operator <<(std::ostream& os, const "+str(dt)+"& m);", file=self.prototypes)
-            print("std::ostream& operator <<(std::ostream& os, const "+str(dt)+"& m) {", file=self.header_output)
+            print("std::ostream& operator <<(std::ostream& os, const "+str(dt)+"& v);", file=self.prototypes)
+            print("std::ostream& operator <<(std::ostream& os, const "+str(dt)+"& v) {", file=self.header_output)
             print("    os << to_string(m);", file=self.header_output )
             print("    return os;", file=self.header_output)
             print("}", file=self.header_output)
@@ -156,6 +157,7 @@ class cpp_type_builder:
             print("building struct for type "+st)
             entry = self.structs[st]
             # generate prototype
+            print("", file=self.prototypes)
             print("struct "+st+";", file=self.prototypes)
             # generate definition
             print("////////////////////////////////////////////////////////", file=self.header_output)
@@ -165,11 +167,11 @@ class cpp_type_builder:
             print("};", file=self.header_output)
             print("", file=self.header_output)
             # generate ostream helper for this struct, assumes all members have ostream overloads
-            print("std::ostream& operator <<(std::ostream& os, const "+str(st)+"& m);", file=self.prototypes)
-            print("std::ostream& operator <<(std::ostream& os, const "+str(st)+"& m) {", file=self.header_output)
+            print("std::ostream& operator <<(std::ostream& os, const "+str(st)+"& v);", file=self.prototypes)
+            print("std::ostream& operator <<(std::ostream& os, const "+str(st)+"& v) {", file=self.header_output)
             print("    os << \"struct "+st+" {\";", file=self.header_output)
             for member in entry["entries"]:
-                print("    os << ' ' << \""+member["name"]+":\" << m."+member["name"]+";", file=self.header_output)
+                print("    os << ' ' << \""+member["name"]+":\" << v."+member["name"]+";", file=self.header_output)
             print("    os << \" }\";", file=self.header_output)
             print("    return os;", file=self.header_output)
             print("}", file=self.header_output)
